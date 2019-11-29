@@ -1,44 +1,51 @@
-from flask import render_template
+from flask import render_template, request
 from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms.fields import PasswordField, StringField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email
+
 from order import app
 
+# photo configuration
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app,photos)
+patch_request_class(app, 5 * 1024 * 1024) #set max upload size to 5mb
 
 
 class OrderForm(FlaskForm):
-    first = StringField('Username',
+    first = StringField('First Name',
                         validators=[DataRequired()]
                         )
-    last = PasswordField('Password',
+    last = StringField('Last Name',
                          validators=[DataRequired()]
                          )
-    email = StringField('Email',
-                        validators = [DataRequired(), Email()]
+    email = StringField('Email Address',
+                        validators = [DataRequired(), Email("please enter a valid email address")]
                         )
     quote = BooleanField('Quote Requested')
-    photo = FileField('Photo Upload',
+    upload = FileField('Photo Upload',
                       validators = [FileAllowed(photos, "Images only!")])
     comments = TextAreaField('Comments')
     submit = SubmitField('Submit')
 
 @app.route('/', methods=['GET','POST'])
 def order():
+    print('receuved')
     form = OrderForm()
-    '''
     if form.validate_on_submit():
-        filename = photos.save(form.photo.data)
+        print('hello')
+        filename = photos.save(form.upload.data)
+        print(filename)
         file_url = photos.url(filename)
+        print(file_url)
     else:
         file_url = None
-        
+    print(form.errors)
     return render_template('index.html', form=form, file_url=file_url)
     '''
     return render_template('index.html',form=form)
+    '''
 
 @app.errorhandler(404)
 def pageNotFound(error):

@@ -1,5 +1,7 @@
 /.DS_Store
+**/.DS_Store
 /.idea/
 /venv/
 /lite/
 __pycache__/
+/uploads/*
