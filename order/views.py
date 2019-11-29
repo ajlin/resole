@@ -21,17 +21,14 @@ class OrderForm(FlaskForm):
                         validators = [DataRequired(), Email()]
                         )
     quote = BooleanField('Quote Requested')
-    '''
     photo = FileField('Photo Upload',
                       validators = [FileAllowed(photos, "Images only!")])
-    '''
     comments = TextAreaField('Comments')
     submit = SubmitField('Submit')
 
 @app.route('/', methods=['GET','POST'])
 def order():
     form = OrderForm()
-
     '''
     if form.validate_on_submit():
         filename = photos.save(form.photo.data)

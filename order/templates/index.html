@@ -21,6 +21,12 @@
         {{ form.comments(size=32) }}
     </p>
     <p>{{ form.quote() }} {{ form.quote.label }}</p>
+    <p>
+        {{ form.photo }}
+        {% for error in form.photo.errors %}
+         <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+    </p>
     <p>{{ form.submit() }}</p>
 </form>
 </html>
