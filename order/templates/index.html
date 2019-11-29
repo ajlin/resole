@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% endblock %}
+
+<!-- create a folder named templates, put this file into it -->
+<!DOCTYPE html>
+<title>Resole Beta</title>
+<h1>Order Form</h1>
+<form action="" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.first.label }}<br>
+        {{ form.username(size=32) }}
+    </p>
+    <p>
+        {{ form.last.label }}<br>
+        {{ form.last(size=32) }}
+    </p>
+    <p>
+        {{ form.email.label }}<br>
+        {{ form.email(size=32) }}
+    </p>
+    <p>{{ form.quote() }} {{ form.quote.label }}</p>
+    <p>{{ form.submit() }}</p>
+</form>
+<h1>Photo Upload</h1>
+<form method="POST" enctype="multipart/form-data">
+     {{ form.hidden_tag() }}
+     {{ form.photo }}
+     {% for error in form.photo.errors %}
+         <span style="color: red;">{{ error }}</span>
+     {% endfor %}
+     {{ form.submit }}
+</form>
+
+{% if file_url %}
+<br>
+<img src="{{ file_url }}">
+{% endif %}
