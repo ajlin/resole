@@ -2,3 +2,4 @@
 /.idea/
 /venv/
 /lite/
+__pycache__/

@@ -1,8 +1,10 @@
-from flask-uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
+from flask import render_template
+from flask_uploads import UploadSet, configure_uploads, IMAGES, patch_request_class
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms.fields import PasswordField, StringField, BooleanField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email
+from order import app
 
 photos = UploadSet('photos', IMAGES)
 configure_uploads(app,photos)
@@ -39,4 +41,8 @@ def order():
         
     return render_template('index.html', form=form, file_url=file_url)
     '''
-    return render_template('index.html', form=form)
+    return render_template('index.html',form=form)
+
+@app.errorhandler(404)
+def pageNotFound(error):
+    return "page not found"
