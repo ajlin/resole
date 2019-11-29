@@ -22,9 +22,15 @@
         {{ form.email.label }}<br>
         {{ form.email(size=32) }}
     </p>
+    <p>
+        {{ form.comments.label }}<br>
+        {{ form.comments(size=32) }}
+    </p>
     <p>{{ form.quote() }} {{ form.quote.label }}</p>
     <p>{{ form.submit() }}</p>
 </form>
+
+<!--
 <h1>Photo Upload</h1>
 <form method="POST" enctype="multipart/form-data">
      {{ form.hidden_tag() }}
@@ -39,3 +45,4 @@
 <br>
 <img src="{{ file_url }}">
 {% endif %}
+-->
