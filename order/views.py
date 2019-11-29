@@ -31,17 +31,12 @@ class OrderForm(FlaskForm):
 
 @app.route('/', methods=['GET','POST'])
 def order():
-    print('receuved')
     form = OrderForm()
     if form.validate_on_submit():
-        print('hello')
         filename = photos.save(form.upload.data)
-        print(filename)
         file_url = photos.url(filename)
-        print(file_url)
     else:
         file_url = None
-    print(form.errors)
     return render_template('index.html', form=form, file_url=file_url)
     '''
     return render_template('index.html',form=form)
