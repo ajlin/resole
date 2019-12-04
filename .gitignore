@@ -5,3 +5,4 @@
 /lite/
 __pycache__/
 /uploads/*
+order/uploads/*
